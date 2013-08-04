@@ -1,0 +1,10 @@
+{
+	"mysql": {
+		"password": "root"
+	},
+	"php": {
+		"date": {
+			"timezone": "Asia/Tokyo"
+		}
+	}
+}
