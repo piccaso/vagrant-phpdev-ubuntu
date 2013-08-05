@@ -56,12 +56,12 @@
 	$ sudo ln -s /share/my_first_workspace /var/www/my_first_workspace
 	$ exit
 
-access http://192.168.33.10/my_first_workspace/
+access http://localhost:8080/my_first_workspace/
 
-### Features
+## Features
 
-* phpMyAdmin http://192.168.33.10/phpmyadmin/ (root/root)
-* DBDocs http://192.168.33.10/dbdocs/
+* phpMyAdmin http://localhost:8080/phpmyadmin/ (root/root)
+* DBDocs http://localhost:8080/dbdocs/
 * phpunit command
 * apigen command
 * php-cs-fixer command
