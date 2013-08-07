@@ -83,9 +83,23 @@ end
 #
 # install packages
 #
-%w{ruby-dev git phpmyadmin}.each do |p|
+apt_repository 'nodejs' do
+	uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
+	distribution node['lsb']['codename']
+	components ['main']
+	keyserver 'keyserver.ubuntu.com'
+	key 'C7917B12'
+end
+
+%w{ruby-dev git phpmyadmin nodejs}.each do |p|
 	package p do
 		action :install
+	end
+end
+
+%w{coffee-script}.each do |p|
+	execute p do
+		command 'npm install -g ' + p
 	end
 end
 
