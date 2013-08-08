@@ -91,7 +91,7 @@ apt_repository 'nodejs' do
 	key 'C7917B12'
 end
 
-%w{ruby-dev git phpmyadmin nodejs}.each do |p|
+%w{ruby-dev git phpmyadmin nodejs mongodb redis-server}.each do |p|
 	package p do
 		action :install
 	end
@@ -110,7 +110,7 @@ end
 #
 # install gem packages
 #
-%w{jsduck}.each do |p|
+%w{fluentd jsduck}.each do |p|
 	gem_package p do
 		action :install
 	end

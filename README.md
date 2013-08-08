@@ -1,35 +1,21 @@
 # PHP Development on Vagrant
 
-<table>
-<tr>
-<th>PHP</th>
-<td>5.5</td>
-</tr>
-<tr>
-<th>Apache</th>
-<td>2.4</td>
-</tr>
-<tr>
-<th>MySQL</th>
-<td>5.5</td>
-</tr>
-<tr>
-<th>phpMyAdmin</th>
-<td>http://www.phpmyadmin.net/</td>
-</tr>
-<tr>
-<th>jsduck</th>
-<td>https://github.com/senchalabs/jsduck</td>
-</tr>
-<tr>
-<th>phpdev-tools</th>
-<td>https://github.com/mp-php/phpdev-tools</td>
-</tr>
-<tr>
-<th>fuel-dbdocs</th>
-<td>https://github.com/mp-php/fuel-dbdocs</td>
-</tr>
-</table>
+## Features
+
+* PHP 5.5 http://php.net/
+* Apache 2.4 http://www.apache.org/
+* MySQL 5.5 http://www.mysql.com/
+* phpMyAdmin http://www.phpmyadmin.net/ http://localhost:8080/phpmyadmin/ (root/root)
+* DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8080/dbdocs/
+* PHPUnit http://phpunit.de/manual/
+* ApiGen http://apigen.org/
+* phpPHP-CS-Fixer http://cs.sensiolabs.org/
+* jsduck https://github.com/senchalabs/jsduck
+* node.js http://nodejs.org/
+* CoffeeScript http://coffeescript.org/
+* Fluentd http://fluentd.org/
+* MongoDB http://www.mongodb.org/
+* Redis http://redis.io/
 
 ## Usage
 
@@ -39,33 +25,27 @@
 	$ cd vagrant-phpdev-ubuntu/
 	$ vagrant up # Please wait a few minutes
 
-### Make workspace
+### Make Project
 
 #### On your machine
 
-	$ mkdir share/my_first_workspace
-	$ vim share/my_first_workspace/index.php
+	$ mkdir share/my_first_project
+	$ vim share/my_first_project/index.php
+
+##### share/my_first_project/index.php
 
 	<?php
 	phpinfo();
+
+##### Log in with vagrant ssh
 
 	$ vagrant ssh
 
 #### On vagrant
 
-	$ sudo ln -s /share/my_first_workspace /var/www/my_first_workspace
-	$ exit
+	$ sudo ln -s /share/my_first_project /var/www/my_first_project
 
-access http://localhost:8080/my_first_workspace/
-
-## Features
-
-* phpMyAdmin http://localhost:8080/phpmyadmin/ (root/root)
-* DBDocs http://localhost:8080/dbdocs/
-* phpunit command
-* apigen command
-* php-cs-fixer command
-* jsduck command
+access http://localhost:8080/my_first_project/
 
 ## License
 
