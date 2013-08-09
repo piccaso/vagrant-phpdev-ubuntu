@@ -137,9 +137,8 @@ end
 #
 # install composer
 #
-execute 'composer' do
-	not_if {File.exists?('/usr/local/bin/composer')}
-	command 'curl -sS https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer'
+composer '/usr/local/bin' do
+	action :install
 end
 
 #
@@ -147,18 +146,14 @@ end
 #
 git '/home/vagrant/phpdev-tools' do
 	action :checkout
-	notifies :run, 'execute[phpdev-tools]'
 	user 'vagrant'
 	group 'vagrant'
 	repository 'https://github.com/mp-php/phpdev-tools.git'
 	reference 'master'
 end
 
-execute 'phpdev-tools' do
-	action :nothing
-	user 'vagrant'
-	group 'vagrant'
-	command 'cd /home/vagrant/phpdev-tools; composer install'
+composer_project '/home/vagrant/phpdev-tools' do
+	action :install
 end
 
 link '/usr/local/bin/phpunit' do
@@ -178,7 +173,6 @@ end
 #
 git '/home/vagrant/fuel-dbdocs' do
 	action :checkout
-	notifies :run, 'execute[fuel-dbdocs]'
 	user 'vagrant'
 	group 'vagrant'
 	repository 'https://github.com/mp-php/fuel-dbdocs.git'
@@ -186,14 +180,12 @@ git '/home/vagrant/fuel-dbdocs' do
 	enable_submodules true
 end
 
-execute 'fuel-dbdocs' do
-	action :nothing
-	user 'vagrant'
-	group 'vagrant'
-	command '
-		cd /home/vagrant/fuel-dbdocs; composer install;
-		cd /home/vagrant/fuel-dbdocs/fuel/packages/dbdocs; composer install;
-	'
+composer_project '/home/vagrant/fuel-dbdocs' do
+	action :install
+end
+
+composer_project '/home/vagrant/fuel-dbdocs/fuel/packages/dbdocs' do
+	action :install
 end
 
 template '/home/vagrant/fuel-dbdocs/fuel/app/config/crypt.php' do

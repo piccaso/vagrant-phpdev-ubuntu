@@ -7,3 +7,6 @@
 [submodule "cookbooks/ruby_build"]
 	path = cookbooks/ruby_build
 	url = https://github.com/fnichol/chef-ruby_build.git
+[submodule "cookbooks/composer"]
+	path = cookbooks/composer
+	url = https://github.com/zircote/chef-composer.git
