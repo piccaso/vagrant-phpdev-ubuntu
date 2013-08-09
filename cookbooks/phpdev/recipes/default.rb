@@ -7,21 +7,17 @@
 # All rights reserved - Do Not Redistribute
 #
 
+#
+# initialize
+#
 execute 'rbenv' do
 	only_if {File.exists?('/etc/profile.d/rbenv.sh')}
 	command '/etc/profile.d/rbenv.sh'
 end
 
-#
-# apt-get update
-#
 execute 'apt-get' do
 	command 'apt-get update'
 end
-
-#
-# core
-#
 
 #
 # install php and apache
@@ -82,11 +78,7 @@ execute 'mysqladmin' do
 end
 
 #
-# development
-#
-
-#
-# install packages
+# install packages by apt-get
 #
 %w{git mongodb redis-server phpmyadmin}.each do |p|
 	package p do
@@ -99,7 +91,7 @@ link '/var/www/phpmyadmin' do
 end
 
 #
-# install npm packages
+# install packages by npm
 #
 apt_repository 'nodejs' do
 	uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
@@ -120,7 +112,7 @@ end
 end
 
 #
-# install gem packages
+# install packages by gem
 #
 rbenv_ruby '1.9.3-p448' do
 end
@@ -205,6 +197,9 @@ link '/var/www/dbdocs' do
 	to '/home/vagrant/fuel-dbdocs/public'
 end
 
+#
+# run custom recipe
+#
 begin
 	include_recipe 'phpdev::custom'
 rescue Exception => error
