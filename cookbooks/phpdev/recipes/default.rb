@@ -120,7 +120,7 @@ end
 rbenv_global '1.9.3-p448' do
 end
 
-%w{fluentd jsduck}.each do |p|
+%w{fluentd jsduck serverspec}.each do |p|
 	rbenv_gem p do
 		action :install
 	end
