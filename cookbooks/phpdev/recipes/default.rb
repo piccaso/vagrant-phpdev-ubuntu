@@ -7,6 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 
+execute 'rbenv' do
+	only_if {File.exists?('/etc/profile.d/rbenv.sh')}
+	command '/etc/profile.d/rbenv.sh'
+end
+
 #
 # apt-get update
 #
@@ -206,4 +211,10 @@ end
 
 link '/var/www/dbdocs' do
 	to '/home/vagrant/fuel-dbdocs/public'
+end
+
+begin
+	include_recipe 'phpdev::custom'
+rescue Exception => error
+	# avoid Chef::Exceptions::RecipeNotFound
 end

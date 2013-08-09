@@ -47,6 +47,12 @@
 
 access http://localhost:8080/my_first_project/
 
+## Customize
+
+	$ cp cookbooks/phpdev/recipes/custom.rb.default cookbooks/phpdev/recipes/custom.rb
+
+edit cookbooks/phpdev/recipes/custom.rb
+
 ## License
 
 Copyright 2013, Mamoru Otsuka. Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php

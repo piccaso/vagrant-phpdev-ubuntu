@@ -1,0 +1,15 @@
+#
+# Cookbook Name:: phpdev
+# Recipe:: custom
+#
+# Copyright 2013, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+
+#
+# Your recipe here
+#
+#link '/var/www/your_project' do
+#	to '/share/your_project'
+#end
