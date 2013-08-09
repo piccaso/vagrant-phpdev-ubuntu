@@ -45,7 +45,7 @@ end
 end
 
 execute 'a2enmod' do
-	command 'sudo a2enmod rewrite'
+	command 'a2enmod rewrite'
 end
 
 service 'apache2' do
