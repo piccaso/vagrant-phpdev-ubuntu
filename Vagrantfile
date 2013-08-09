@@ -92,6 +92,8 @@ Vagrant.configure("2") do |config|
   #   chef.roles_path = "../my-recipes/roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
     chef.add_recipe "apt"
+    chef.add_recipe "ruby_build"
+    chef.add_recipe "rbenv::system"
     chef.add_recipe "phpdev"
   #   chef.add_role "web"
   #

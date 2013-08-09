@@ -8,7 +8,7 @@
 #
 
 #
-# apt-get update and upgrade
+# apt-get update
 #
 execute 'apt-get' do
 	command 'apt-get update'
@@ -52,14 +52,14 @@ service 'apache2' do
 	action [:enable, :reload]
 end
 
-template "/etc/php5/apache2/php.ini" do
+template '/etc/php5/apache2/php.ini' do
 	notifies :reload, 'service[apache2]'
 end
 
-template "/etc/php5/cli/php.ini" do
+template '/etc/php5/cli/php.ini' do
 end
 
-template "/etc/apache2/apache2.conf" do
+template '/etc/apache2/apache2.conf' do
 	notifies :reload, 'service[apache2]'
 end
 
@@ -83,6 +83,19 @@ end
 #
 # install packages
 #
+%w{git mongodb redis-server phpmyadmin}.each do |p|
+	package p do
+		action :install
+	end
+end
+
+link '/var/www/phpmyadmin' do
+	to '/usr/share/phpmyadmin'
+end
+
+#
+# install npm packages
+#
 apt_repository 'nodejs' do
 	uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
 	distribution node['lsb']['codename']
@@ -91,10 +104,8 @@ apt_repository 'nodejs' do
 	key 'C7917B12'
 end
 
-%w{ruby-dev git phpmyadmin nodejs mongodb redis-server}.each do |p|
-	package p do
-		action :install
-	end
+package 'nodejs' do
+	action :install
 end
 
 %w{coffee-script}.each do |p|
@@ -103,15 +114,17 @@ end
 	end
 end
 
-link '/var/www/phpmyadmin' do
- 	to '/usr/share/phpmyadmin'
-end
-
 #
 # install gem packages
 #
+rbenv_ruby '1.9.3-p448' do
+end
+
+rbenv_global '1.9.3-p448' do
+end
+
 %w{fluentd jsduck}.each do |p|
-	gem_package p do
+	rbenv_gem p do
 		action :install
 	end
 end
@@ -128,6 +141,8 @@ end
 # install phpdev-tools
 #
 git '/home/vagrant/phpdev-tools' do
+	action :checkout
+	notifies :run, 'execute[phpdev-tools]'
 	user 'vagrant'
 	group 'vagrant'
 	repository 'https://github.com/mp-php/phpdev-tools.git'
@@ -135,6 +150,7 @@ git '/home/vagrant/phpdev-tools' do
 end
 
 execute 'phpdev-tools' do
+	action :nothing
 	user 'vagrant'
 	group 'vagrant'
 	command 'cd /home/vagrant/phpdev-tools; composer install'
@@ -156,6 +172,8 @@ end
 # install fuel-dbdocs
 #
 git '/home/vagrant/fuel-dbdocs' do
+	action :checkout
+	notifies :run, 'execute[fuel-dbdocs]'
 	user 'vagrant'
 	group 'vagrant'
 	repository 'https://github.com/mp-php/fuel-dbdocs.git'
@@ -164,6 +182,7 @@ git '/home/vagrant/fuel-dbdocs' do
 end
 
 execute 'fuel-dbdocs' do
+	action :nothing
 	user 'vagrant'
 	group 'vagrant'
 	command '
@@ -172,7 +191,7 @@ execute 'fuel-dbdocs' do
 	'
 end
 
-template "/home/vagrant/fuel-dbdocs/fuel/app/config/crypt.php" do
+template '/home/vagrant/fuel-dbdocs/fuel/app/config/crypt.php' do
 	user 'vagrant'
 	group 'vagrant'
 end
