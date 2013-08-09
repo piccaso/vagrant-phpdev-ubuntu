@@ -94,8 +94,9 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apt"
     chef.add_recipe "ruby_build"
     chef.add_recipe "rbenv::system"
-    chef.add_recipe "composer"
     chef.add_recipe "phpdev"
+    chef.add_recipe "composer"
+    chef.add_recipe "phpdev::tools"
   #   chef.add_role "web"
   #
   #   # You may also specify custom JSON attributes:
