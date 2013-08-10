@@ -9,7 +9,7 @@
 * DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8080/dbdocs/
 * PHPUnit http://phpunit.de/manual/
 * ApiGen http://apigen.org/
-* phpPHP-CS-Fixer http://cs.sensiolabs.org/
+* PHP-CS-Fixer http://cs.sensiolabs.org/
 * jsduck https://github.com/senchalabs/jsduck
 * node.js http://nodejs.org/
 * CoffeeScript http://coffeescript.org/
