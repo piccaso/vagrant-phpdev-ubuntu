@@ -1,3 +1,4 @@
 .vagrant/
 share/
 cookbooks/phpdev/recipes/custom.rb
+templates/custom/
