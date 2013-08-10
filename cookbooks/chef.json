@@ -6,5 +6,17 @@
 		"date": {
 			"timezone": "Asia/Tokyo"
 		}
+	},
+	"git": {
+		"user": {
+			"email": "you@example.com",
+			"name": "Your Name"
+		}
+	},
+	"rbenv": {
+		"rubies": [
+			"2.0.0-p247"
+		],
+		"global": "2.0.0-p247"
 	}
 }

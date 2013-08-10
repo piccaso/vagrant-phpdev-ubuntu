@@ -10,9 +10,9 @@
 #
 # initialize
 #
-execute 'rbenv' do
-	only_if {File.exists?('/etc/profile.d/rbenv.sh')}
-	command '/etc/profile.d/rbenv.sh'
+template '/home/vagrant/.bashrc' do
+	user 'vagrant'
+	group 'vagrant'
 end
 
 execute 'apt-get' do
@@ -86,6 +86,13 @@ end
 	end
 end
 
+execute 'git' do
+	command '
+		git config --global user.email "' + node['git']['user']['email'] + '"
+		git config --global user.name "' + node['git']['user']['name'] + '"
+	'
+end
+ 
 link '/var/www/phpmyadmin' do
 	to '/usr/share/phpmyadmin'
 end
@@ -114,12 +121,6 @@ end
 #
 # install packages by gem
 #
-rbenv_ruby '1.9.3-p448' do
-end
-
-rbenv_global '1.9.3-p448' do
-end
-
 %w{fluentd jsduck serverspec}.each do |p|
 	rbenv_gem p do
 		action :install
