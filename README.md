@@ -16,6 +16,7 @@
 * Fluentd http://fluentd.org/
 * MongoDB http://www.mongodb.org/
 * Redis http://redis.io/
+* serverspec http://serverspec.org/
 
 ## Usage
 
@@ -23,7 +24,7 @@
 
 	$ git clone --recursive https://github.com/mp-php/vagrant-phpdev-ubuntu.git
 	$ cd vagrant-phpdev-ubuntu/
-	$ vagrant up # Please wait a few minutes
+	$ vagrant up # this could take a while...
 
 ### Make Project
 

@@ -17,6 +17,7 @@ end
 
 execute 'apt-get' do
 	command 'apt-get update'
+	command 'apt-get upgrade -y'
 end
 
 #
@@ -51,17 +52,6 @@ end
 service 'apache2' do
 	supports :status => true, :restart => true, :reload => true
 	action [:enable, :reload]
-end
-
-template '/etc/php5/apache2/php.ini' do
-	notifies :reload, 'service[apache2]'
-end
-
-template '/etc/php5/cli/php.ini' do
-end
-
-template '/etc/apache2/apache2.conf' do
-	notifies :reload, 'service[apache2]'
 end
 
 #
@@ -122,9 +112,23 @@ end
 # install packages by gem
 #
 %w{fluentd jsduck serverspec}.each do |p|
-	rbenv_gem p do
+	gem_package p do
 		action :install
 	end
+end
+
+#
+# templates
+#
+template '/etc/php5/apache2/php.ini' do
+	notifies :reload, 'service[apache2]'
+end
+
+template '/etc/php5/cli/php.ini' do
+end
+
+template '/etc/apache2/apache2.conf' do
+	notifies :reload, 'service[apache2]'
 end
 
 #
