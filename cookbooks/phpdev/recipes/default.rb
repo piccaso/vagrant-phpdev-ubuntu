@@ -17,7 +17,6 @@ end
 
 execute 'apt-get' do
 	command 'apt-get update'
-	command 'apt-get upgrade -y'
 end
 
 #
