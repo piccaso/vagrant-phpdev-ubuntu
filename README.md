@@ -5,18 +5,21 @@
 * PHP 5.5 http://php.net/
 * Apache 2.4 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
-* phpMyAdmin http://www.phpmyadmin.net/ http://localhost:8080/phpmyadmin/ (root/root)
-* DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8080/dbdocs/
+* MongoDB http://www.mongodb.org/
+* Redis http://redis.io/
+* phpMyAdmin http://www.phpmyadmin.net/ http://localhost:8081/phpmyadmin/ (root/root)
+* node.js http://nodejs.org/
+* CoffeeScript http://coffeescript.org/
+* JSHint http://www.jshint.com/
+* Grunt http://gruntjs.com/
+* Fluentd http://fluentd.org/
+* jsduck https://github.com/senchalabs/jsduck
+* serverspec http://serverspec.org/
+* Compass http://compass-style.org/
 * PHPUnit http://phpunit.de/manual/
 * ApiGen http://apigen.org/
 * PHP-CS-Fixer http://cs.sensiolabs.org/
-* jsduck https://github.com/senchalabs/jsduck
-* node.js http://nodejs.org/
-* CoffeeScript http://coffeescript.org/
-* Fluentd http://fluentd.org/
-* MongoDB http://www.mongodb.org/
-* Redis http://redis.io/
-* serverspec http://serverspec.org/
+* DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8081/dbdocs/
 
 ## Usage
 
@@ -46,7 +49,7 @@
 
 	$ sudo ln -s /share/my_first_project /var/www/my_first_project
 
-access http://localhost:8080/my_first_project/
+access http://localhost:8081/my_first_project/
 
 ## Customize
 
