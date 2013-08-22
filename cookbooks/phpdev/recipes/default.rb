@@ -150,6 +150,20 @@ end
 end
 
 #
+# install PhantomJS
+#
+execute 'phantomjs' do
+	command <<-CMD
+    wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
+    tar jxvf phantomjs-1.9.1-linux-x86_64.tar.bz2
+    cp phantomjs-1.9.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+    rm -r phantomjs-1.9.1-linux-x86_64
+    rm phantomjs-1.9.1-linux-x86_64.tar.bz2
+	CMD
+	not_if {File.exists?('/usr/local/bin/phantomjs')}
+end
+
+#
 # templates
 #
 template '/etc/php5/apache2/php.ini' do
