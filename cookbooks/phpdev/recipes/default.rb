@@ -143,7 +143,7 @@ end
 #
 # install packages by gem
 #
-%w{fluentd jsduck serverspec compass heroku}.each do |p|
+%w{fluentd jsduck serverspec compass heroku af}.each do |p|
   gem_package p do
     action :install
   end
