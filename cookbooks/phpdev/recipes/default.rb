@@ -38,7 +38,7 @@ apt_repository 'apache2' do
   key 'E5267A6C'
 end
 
-%w{php5 php5-dev php5-mysqlnd}.each do |p|
+%w{php5 php5-dev php5-mysqlnd php5-curl}.each do |p|
   package p do
     action :install
   end
