@@ -22,23 +22,7 @@ end
 #
 # install php and apache
 #
-apt_repository 'php5' do
-  uri 'http://ppa.launchpad.net/ondrej/php5/ubuntu'
-  distribution node['lsb']['codename']
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key 'E5267A6C'
-end
-
-apt_repository 'apache2' do
-  uri 'http://ppa.launchpad.net/ondrej/apache2/ubuntu'
-  distribution node['lsb']['codename']
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key 'E5267A6C'
-end
-
-%w{php5 php5-dev php5-mysqlnd php5-curl}.each do |p|
+%w{php5 php5-dev php-pear php5-mysqlnd php5-curl}.each do |p|
   package p do
     action :install
   end
@@ -116,7 +100,7 @@ end
 #
 execute 'pecl-mongo' do
   command 'pecl install mongo'
-  not_if {File.exists?('/usr/lib/php5/20121212/mongo.so')}
+  not_if {File.exists?('/usr/lib/php5/20100525/mongo.so')}
 end
 
 #
@@ -173,7 +157,7 @@ end
 template '/etc/php5/cli/php.ini' do
 end
 
-template '/etc/apache2/apache2.conf' do
+template '/etc/apache2/sites-available/default' do
   notifies :restart, 'service[apache2]'
 end
 

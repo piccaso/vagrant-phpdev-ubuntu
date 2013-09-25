@@ -2,14 +2,14 @@
 
 ## Features
 
-* PHP 5.5 http://php.net/
-* Apache 2.4 http://www.apache.org/
+* PHP 5.4 http://php.net/
+* Apache 2.2 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
-* phpMyAdmin http://www.phpmyadmin.net/ http://localhost:8081/phpmyadmin/ (root/root)
+* phpMyAdmin http://www.phpmyadmin.net/ http://localhost:8082/phpmyadmin/ (root/root)
 * MongoDB http://www.mongodb.org/
-* RockMongo http://rockmongo.com/ http://localhost:8081/rockmongo/ (admin/admin)
+* RockMongo http://rockmongo.com/ http://localhost:8082/rockmongo/ (admin/admin)
 * Redis http://redis.io/
-* phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://localhost:8081/phpredisadmin/
+* phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://localhost:8082/phpredisadmin/
 * node.js http://nodejs.org/
 * CoffeeScript http://coffeescript.org/
 * JSHint http://www.jshint.com/
@@ -21,7 +21,7 @@
 * PHPUnit http://phpunit.de/manual/
 * ApiGen http://apigen.org/
 * PHP-CS-Fixer http://cs.sensiolabs.org/
-* DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8081/dbdocs/
+* DBDocs https://github.com/mp-php/fuel-dbdocs http://localhost:8082/dbdocs/
 
 ## Usage
 
@@ -51,7 +51,7 @@
 
 	$ sudo ln -s /share/my_first_project /var/www/my_first_project
 
-access http://localhost:8081/my_first_project/
+access http://localhost:8082/my_first_project/
 
 ## Customize
 
