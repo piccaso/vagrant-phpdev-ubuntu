@@ -38,6 +38,19 @@ execute 'a2enmod' do
 end
 
 #
+# install for perl
+#
+%w{libapache2-mod-perl2}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+execute 'a2enmod' do
+  command 'a2enmod perl' # apache will be restarted by template
+end
+
+#
 # install mysql
 #
 package 'mysql-server' do
