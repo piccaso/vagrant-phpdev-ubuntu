@@ -77,7 +77,7 @@ end
 #
 # install packages by apt-get
 #
-%w{git mongodb redis-server phpmyadmin}.each do |p|
+%w{git mongodb redis-server phpmyadmin php-apc}.each do |p|
   package p do
     action :install
   end
@@ -131,7 +131,7 @@ package 'nodejs' do
   action :install
 end
 
-%w{coffee-script jshint grunt-cli}.each do |p|
+%w{coffee-script jshint grunt-cli bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
   end
