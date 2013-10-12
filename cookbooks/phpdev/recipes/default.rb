@@ -77,7 +77,7 @@ end
 #
 # install packages by apt-get
 #
-# libzmq-dev, re2c and pkg-config is php-zmq
+# libzmq-dev, re2c and pkg-config is for php-zmq
 #
 %w{git mongodb redis-server phpmyadmin php-apc paco libzmq-dev re2c pkg-config}.each do |p|
   package p do
