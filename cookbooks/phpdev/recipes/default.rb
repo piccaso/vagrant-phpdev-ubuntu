@@ -77,9 +77,7 @@ end
 #
 # install packages by apt-get
 #
-# libzmq-dev, re2c and pkg-config is for php-zmq
-#
-%w{git mongodb redis-server phpmyadmin php-apc paco libzmq-dev re2c pkg-config}.each do |p|
+%w{git mongodb redis-server phpmyadmin php-apc paco}.each do |p|
   package p do
     action :install
   end
@@ -97,6 +95,29 @@ end
 
 link '/var/www/phpmyadmin' do
   to '/usr/share/phpmyadmin'
+end
+
+#
+# install php-zmq
+#
+%w{libzmq-dev re2c pkg-config}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+execute 'php-zmq' do
+  command <<-CMD
+    git clone git://github.com/mkoppanen/php-zmq.git
+    cd php-zmq/
+    phpize
+    ./configure
+    make
+    paco -D make install
+    cd ../
+    rm -r php-zmq
+  CMD
+  not_if {File.exists?('/usr/lib/php5/20100525/zmq.so')}
 end
 
 #
