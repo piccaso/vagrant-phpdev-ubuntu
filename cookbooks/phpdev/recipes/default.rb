@@ -60,12 +60,6 @@ end
 #
 # install mysql
 #
-%w{php5-mysqlnd phpmyadmin}.each do |p|
-  package 'php5-mysqlnd' do
-    action :install
-  end
-end
-
 package 'mysql-server' do
   action :install
   notifies :run, 'execute[mysqladmin]'
@@ -85,6 +79,12 @@ end
 execute 'mysql' do
   action :nothing
   command "mysql -u root -p#{node['mysql']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['password']}' WITH GRANT OPTION\""
+end
+
+%w{php5-mysqlnd phpmyadmin}.each do |p|
+  package p do
+    action :install
+  end
 end
 
 link '/var/www/phpmyadmin' do
