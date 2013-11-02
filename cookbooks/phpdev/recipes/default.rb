@@ -42,7 +42,7 @@ end
 #
 # install php and apache
 #
-%w{php5 php5-dev php-pear php5-curl php-apc}.each do |p|
+%w{php5 php5-dev php-pear php5-curl php5-mcrypt php-apc}.each do |p|
   package p do
     action :install
   end
