@@ -20,9 +20,29 @@ execute 'apt-get' do
 end
 
 #
+# install packages by apt-get
+#
+%w{paco git}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+#
+# git settings
+#
+execute 'git-config-user-email' do
+  command "sudo -u vagrant -H git config --global user.email \"#{node['git']['user']['email']}\""
+end
+
+execute 'git-config-user-name' do
+  command "sudo -u vagrant -H git config --global user.name \"#{node['git']['user']['name']}\""
+end
+ 
+#
 # install php and apache
 #
-%w{php5 php5-dev php-pear php5-mysqlnd php5-curl}.each do |p|
+%w{php5 php5-dev php-pear php5-curl php-apc}.each do |p|
   package p do
     action :install
   end
@@ -40,6 +60,12 @@ end
 #
 # install mysql
 #
+%w{php5-mysqlnd phpmyadmin}.each do |p|
+  package 'php5-mysqlnd' do
+    action :install
+  end
+end
+
 package 'mysql-server' do
   action :install
   notifies :run, 'execute[mysqladmin]'
@@ -61,13 +87,15 @@ execute 'mysql' do
   command "mysql -u root -p#{node['mysql']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['password']}' WITH GRANT OPTION\""
 end
 
+link '/var/www/phpmyadmin' do
+  to '/usr/share/phpmyadmin'
+end
+
 #
-# install packages by apt-get
+# install mongodb
 #
-%w{paco git mongodb redis-server phpmyadmin php-apc}.each do |p|
-  package p do
-    action :install
-  end
+package 'mongodb' do
+  action :install
 end
 
 service 'mongodb' do
@@ -75,13 +103,21 @@ service 'mongodb' do
   action [:enable, :start]
 end
 
+execute 'pecl-mongo' do
+  command 'pecl install mongo'
+  not_if {File.exists?('/usr/lib/php5/20100525/mongo.so')}
+end
+
+#
+# install redis
+#
+package 'redis-server' do
+  action :install
+end
+
 service 'redis-server' do
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
-end
-
-link '/var/www/phpmyadmin' do
-  to '/usr/share/phpmyadmin'
 end
 
 #
@@ -105,25 +141,6 @@ execute 'php-zmq' do
     rm -r php-zmq
   CMD
   not_if {File.exists?('/usr/lib/php5/20100525/zmq.so')}
-end
-
-#
-# git settings
-#
-execute 'git-config-user-email' do
-  command "sudo -u vagrant -H git config --global user.email \"#{node['git']['user']['email']}\""
-end
-
-execute 'git-config-user-name' do
-  command "sudo -u vagrant -H git config --global user.name \"#{node['git']['user']['name']}\""
-end
- 
-#
-# install packages by pecl
-#
-execute 'pecl-mongo' do
-  command 'pecl install mongo'
-  not_if {File.exists?('/usr/lib/php5/20100525/mongo.so')}
 end
 
 #
