@@ -1,12 +1,6 @@
 [submodule "cookbooks/apt"]
 	path = cookbooks/apt
 	url = https://github.com/opscode-cookbooks/apt.git
-[submodule "cookbooks/rbenv"]
-	path = cookbooks/rbenv
-	url = https://github.com/fnichol/chef-rbenv.git
-[submodule "cookbooks/ruby_build"]
-	path = cookbooks/ruby_build
-	url = https://github.com/fnichol/chef-ruby_build.git
 [submodule "cookbooks/composer"]
 	path = cookbooks/composer
 	url = https://github.com/zircote/chef-composer.git

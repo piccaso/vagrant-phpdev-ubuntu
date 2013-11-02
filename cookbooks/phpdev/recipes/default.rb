@@ -38,19 +38,6 @@ execute 'a2enmod' do
 end
 
 #
-# install for perl
-#
-%w{libapache2-mod-perl2}.each do |p|
-  package p do
-    action :install
-  end
-end
-
-execute 'a2enmod' do
-  command 'a2enmod perl' # apache will be restarted by template
-end
-
-#
 # install mysql
 #
 package 'mysql-server' do
@@ -77,7 +64,7 @@ end
 #
 # install packages by apt-get
 #
-%w{git mongodb redis-server phpmyadmin php-apc paco}.each do |p|
+%w{paco git mongodb redis-server phpmyadmin php-apc}.each do |p|
   package p do
     action :install
   end
@@ -154,7 +141,7 @@ package 'nodejs' do
   action :install
 end
 
-%w{coffee-script jshint grunt-cli bower}.each do |p|
+%w{grunt-cli bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
   end
@@ -163,7 +150,7 @@ end
 #
 # install packages by gem
 #
-%w{fluentd jsduck serverspec compass heroku af}.each do |p|
+%w{fluentd heroku af}.each do |p|
   gem_package p do
     action :install
   end

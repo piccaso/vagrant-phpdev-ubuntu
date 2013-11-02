@@ -35,43 +35,6 @@ link '/usr/local/bin/php-cs-fixer' do
 end
 
 #
-# install fuel-dbdocs
-#
-git '/home/vagrant/fuel-dbdocs' do
-  action :checkout
-  user 'vagrant'
-  group 'vagrant'
-  repository 'https://github.com/mp-php/fuel-dbdocs.git'
-  reference 'master'
-  enable_submodules true
-end
-
-composer_project '/home/vagrant/fuel-dbdocs' do
-  action :install
-end
-
-composer_project '/home/vagrant/fuel-dbdocs/fuel/packages/dbdocs' do
-  action :install
-end
-
-template '/home/vagrant/fuel-dbdocs/fuel/app/config/crypt.php' do
-  user 'vagrant'
-  group 'vagrant'
-end
-
-directory '/home/vagrant/fuel-dbdocs/fuel/app/logs' do
-  mode 0777
-end
-
-directory '/home/vagrant/fuel-dbdocs/public/dbdocs' do
-  mode 0777
-end
-
-link '/var/www/dbdocs' do
-  to '/home/vagrant/fuel-dbdocs/public'
-end
-
-#
 # install RockMongo
 #
 git '/home/vagrant/rockmongo' do
