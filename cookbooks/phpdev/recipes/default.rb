@@ -121,6 +121,20 @@ service 'redis-server' do
 end
 
 #
+# install gearman
+#
+%w{gearman libgearman-dev}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+execute 'pecl-gearman' do
+  command 'pecl install gearman-1.0.3'
+  not_if {File.exists?('/usr/lib/php5/20100525/gearman.so')}
+end
+
+#
 # install php-zmq
 #
 %w{libzmq-dev re2c pkg-config}.each do |p|
