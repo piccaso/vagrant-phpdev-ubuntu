@@ -14,7 +14,6 @@
 * node.js http://nodejs.org/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
-* PhantomJS http://phantomjs.org/
 * Fluentd http://fluentd.org/
 * Compass http://compass-style.org/
 * PHPUnit http://phpunit.de/manual/
