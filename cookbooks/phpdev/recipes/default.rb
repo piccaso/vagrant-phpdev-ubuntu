@@ -181,7 +181,7 @@ end
 #
 # install packages by gem
 #
-%w{fluentd heroku af}.each do |p|
+%w{fluentd compass heroku af}.each do |p|
   gem_package p do
     action :install
   end
