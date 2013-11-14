@@ -16,9 +16,15 @@
 * Bower http://bower.io/
 * Fluentd http://fluentd.org/
 * Compass http://compass-style.org/
-* PHPUnit http://phpunit.de/manual/
 * ApiGen http://apigen.org/
 * PHP-CS-Fixer http://cs.sensiolabs.org/
+* Phing http://www.phing.info/
+* PHPUnit http://phpunit.de/manual/
+* PHP_CodeSniffer https://github.com/squizlabs/PHP_CodeSniffer
+* phpmd https://github.com/manuelpichler/phpmd
+* phpcpd https://github.com/sebastianbergmann/phpcpd
+* phploc https://github.com/sebastianbergmann/phploc
+* pdepend https://github.com/pdepend/pdepend
 
 ## Usage
 
