@@ -100,6 +100,18 @@ execute 'pecl-xdebug' do
 end
 
 #
+# install xhprof
+#
+execute 'pecl-xhprof' do
+  command 'pecl install xhprof-0.9.4'
+  not_if {File.exists?('/usr/lib/php5/20100525/xhprof.so')}
+end
+
+link '/var/www/xhprof' do
+  to '/usr/share/php/xhprof_html'
+end
+
+#
 # install mongodb
 #
 package 'mongodb' do
