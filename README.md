@@ -6,6 +6,7 @@
 * Apache 2.2 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
 * phpMyAdmin http://www.phpmyadmin.net/ http://192.168.33.10/phpmyadmin/ (root/root)
+* Xdebug http://xdebug.org/
 * MongoDB http://www.mongodb.org/
 * RockMongo http://rockmongo.com/ http://192.168.33.10/rockmongo/ (admin/admin)
 * Redis http://redis.io/

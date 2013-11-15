@@ -92,6 +92,14 @@ link '/var/www/phpmyadmin' do
 end
 
 #
+# install xdebug
+#
+execute 'pecl-xdebug' do
+  command 'pecl install xdebug'
+  not_if {File.exists?('/usr/lib/php5/20100525/xdebug.so')}
+end
+
+#
 # install mongodb
 #
 package 'mongodb' do
