@@ -10,7 +10,7 @@
 * RockMongo http://rockmongo.com/ http://192.168.33.10/rockmongo/ (admin/admin)
 * Redis http://redis.io/
 * phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://192.168.33.10/phpredisadmin/
-* 0MQ http://zeromq.org/
+* ZeroMQ http://zeromq.org/
 * node.js http://nodejs.org/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
@@ -25,6 +25,7 @@
 * phpcpd https://github.com/sebastianbergmann/phpcpd
 * phploc https://github.com/sebastianbergmann/phploc
 * pdepend https://github.com/pdepend/pdepend
+* phpdcd https://github.com/sebastianbergmann/phpdcd
 
 ## Usage
 

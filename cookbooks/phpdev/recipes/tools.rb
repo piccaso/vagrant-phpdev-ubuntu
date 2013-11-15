@@ -58,6 +58,10 @@ link '/usr/local/bin/pdepend' do
   to '/home/vagrant/phpdev-tools/vendor/bin/pdepend'
 end
 
+link '/usr/local/bin/phpdcd' do
+  to '/home/vagrant/phpdev-tools/vendor/bin/phpdcd'
+end
+
 #
 # install RockMongo
 #
