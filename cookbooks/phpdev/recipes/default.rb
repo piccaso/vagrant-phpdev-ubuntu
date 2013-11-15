@@ -181,10 +181,18 @@ end
 #
 # install packages by gem
 #
-%w{fluentd compass heroku af}.each do |p|
+%w{compass heroku af}.each do |p|
   gem_package p do
     action :install
   end
+end
+
+#
+# install td-agent
+#
+execute 'td-agent' do
+  command 'curl -L http://toolbelt.treasure-data.com/sh/install-ubuntu-precise.sh | sh'
+  not_if {File.exists?('/etc/init.d/td-agent')}
 end
 
 #

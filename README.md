@@ -14,7 +14,7 @@
 * node.js http://nodejs.org/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
-* Fluentd http://fluentd.org/
+* Fluentd(td-agent) http://fluentd.org/
 * Compass http://compass-style.org/
 * ApiGen http://apigen.org/
 * PHP-CS-Fixer http://cs.sensiolabs.org/
