@@ -38,11 +38,19 @@ end
 execute 'git-config-user-name' do
   command "sudo -u vagrant -H git config --global user.name \"#{node['git']['user']['name']}\""
 end
- 
+
 #
 # install php and apache
 #
-%w{php5 php5-dev php-pear php5-curl php5-mcrypt php-apc}.each do |p|
+apt_repository 'php5' do
+  uri 'http://ppa.launchpad.net/ondrej/php5/ubuntu'
+  distribution node['lsb']['codename']
+  components ['main']
+  keyserver 'keyserver.ubuntu.com'
+  key 'E5267A6C'
+end
+
+%w{php5 php5-dev php5-curl php5-mcrypt}.each do |p|
   package p do
     action :install
   end
@@ -96,7 +104,7 @@ end
 #
 execute 'pecl-xdebug' do
   command 'pecl install xdebug'
-  not_if {File.exists?('/usr/lib/php5/20100525/xdebug.so')}
+  not_if {File.exists?('/usr/lib/php5/20121212/xdebug.so')}
 end
 
 #
@@ -104,7 +112,7 @@ end
 #
 execute 'pecl-xhprof' do
   command 'pecl install xhprof-0.9.4'
-  not_if {File.exists?('/usr/lib/php5/20100525/xhprof.so')}
+  not_if {File.exists?('/usr/lib/php5/20121212/xhprof.so')}
 end
 
 link '/var/www/xhprof' do
@@ -125,7 +133,7 @@ end
 
 execute 'pecl-mongo' do
   command 'pecl install mongo'
-  not_if {File.exists?('/usr/lib/php5/20100525/mongo.so')}
+  not_if {File.exists?('/usr/lib/php5/20121212/mongo.so')}
 end
 
 #
@@ -151,7 +159,7 @@ end
 
 execute 'pecl-gearman' do
   command 'pecl install gearman-1.0.3'
-  not_if {File.exists?('/usr/lib/php5/20100525/gearman.so')}
+  not_if {File.exists?('/usr/lib/php5/20121212/gearman.so')}
 end
 
 #
@@ -174,7 +182,7 @@ execute 'php-zmq' do
     cd ../
     rm -r php-zmq
   CMD
-  not_if {File.exists?('/usr/lib/php5/20100525/zmq.so')}
+  not_if {File.exists?('/usr/lib/php5/20121212/zmq.so')}
 end
 
 #
@@ -225,7 +233,7 @@ end
 template '/etc/php5/cli/php.ini' do
 end
 
-template '/etc/apache2/sites-available/default' do
+template '/etc/apache2/apache2.conf' do
   notifies :restart, 'service[apache2]'
 end
 
