@@ -2,8 +2,8 @@
 
 ## Features
 
-* PHP 5.4 http://php.net/
-* Apache 2.2 http://www.apache.org/
+* PHP 5.5 http://php.net/
+* Apache 2.4 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
 * phpMyAdmin http://www.phpmyadmin.net/ http://192.168.33.10/phpmyadmin/ (root/root)
 * Xdebug http://xdebug.org/
@@ -12,22 +12,16 @@
 * RockMongo http://rockmongo.com/ http://192.168.33.10/rockmongo/ (admin/admin)
 * Redis http://redis.io/
 * phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://192.168.33.10/phpredisadmin/
+* gearman http://gearman.org/
 * ZeroMQ http://zeromq.org/
 * node.js http://nodejs.org/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
-* Fluentd(td-agent) http://fluentd.org/
 * Compass http://compass-style.org/
-* ApiGen http://apigen.org/
-* PHP-CS-Fixer http://cs.sensiolabs.org/
-* Phing http://www.phing.info/
-* PHPUnit http://phpunit.de/manual/
-* PHP_CodeSniffer https://github.com/squizlabs/PHP_CodeSniffer
-* phpmd https://github.com/manuelpichler/phpmd
-* phpcpd https://github.com/sebastianbergmann/phpcpd
-* phploc https://github.com/sebastianbergmann/phploc
-* pdepend https://github.com/pdepend/pdepend
-* phpdcd https://github.com/sebastianbergmann/phpdcd
+* Heroku(cli) https://www.heroku.com/
+* AppFog(cli) https://www.appfog.com/
+* Fluentd(td-agent) http://fluentd.org/
+* phpdev-tools https://github.com/mp-php/phpdev-tools
 
 ## Usage
 
