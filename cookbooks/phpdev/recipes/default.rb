@@ -15,6 +15,11 @@ template '/home/vagrant/.bashrc' do
   group 'vagrant'
 end
 
+template '/home/vagrant/.chef/knife.rb' do
+  user 'vagrant'
+  group 'vagrant'
+end
+
 execute 'apt-get' do
   command 'apt-get update'
 end
