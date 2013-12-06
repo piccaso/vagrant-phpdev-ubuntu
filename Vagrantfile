@@ -86,7 +86,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :inline => "chown -R vagrant /root && chgrp -R vagrant /root"
 
   config.vm.provision :shell, :inline => "apt-get install ruby-dev --no-upgrade -y"
-  config.vm.provision :shell, :inline => "gem install chef --no-rdoc --no-ri --conservative"
+  config.vm.provision :shell, :inline => "gem install chef knife-solo --no-rdoc --no-ri --conservative"
   config.vm.provision :chef_solo do |chef|
   #   chef.cookbooks_path = "../my-recipes/cookbooks"
   #   chef.roles_path = "../my-recipes/roles"
