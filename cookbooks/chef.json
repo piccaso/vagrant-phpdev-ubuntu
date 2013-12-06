@@ -1,6 +1,8 @@
 {
   "mysql": {
-    "password": "root"
+    "root": {
+      "password": "root"
+    }
   },
   "php": {
     "date": {

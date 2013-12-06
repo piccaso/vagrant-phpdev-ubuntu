@@ -86,12 +86,12 @@ end
 
 execute 'mysqladmin' do
   action :nothing
-  command 'mysqladmin password -u root ' + node['mysql']['password']
+  command 'mysqladmin password -u root ' + node['mysql']['root']['password']
 end
 
 execute 'mysql' do
   action :nothing
-  command "mysql -u root -p#{node['mysql']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['password']}' WITH GRANT OPTION\""
+  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
 end
 
 %w{php5-mysqlnd phpmyadmin}.each do |p|
