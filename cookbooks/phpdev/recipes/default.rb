@@ -20,17 +20,18 @@ template '/home/vagrant/.chef/knife.rb' do
   group 'vagrant'
 end
 
+#
+# apt-get update
+#
 execute 'apt-get' do
   command 'apt-get update'
 end
 
 #
-# install packages by apt-get
+# install git
 #
-%w{paco git}.each do |p|
-  package p do
-    action :install
-  end
+package 'git' do
+  action :install
 end
 
 #
@@ -89,19 +90,24 @@ execute 'mysqladmin' do
   command 'mysqladmin password -u root ' + node['mysql']['root']['password']
 end
 
-execute 'mysql' do
-  action :nothing
-  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
+package 'php5-mysqlnd' do
+  action :install
 end
 
-%w{php5-mysqlnd phpmyadmin}.each do |p|
-  package p do
-    action :install
-  end
+#
+# install phpmyadmin
+#
+package 'phpmyadmin' do
+  action :install
 end
 
 link '/var/www/phpmyadmin' do
   to '/usr/share/phpmyadmin'
+end
+
+execute 'mysql' do
+  action :nothing
+  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
 end
 
 #
