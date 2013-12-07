@@ -17,6 +17,9 @@
 # escpecially if they contain "#" chars...
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
 [client]
+# character-set
+default-character-set=utf8
+
 port		= 3306
 socket		= /var/run/mysqld/mysqld.sock
 
@@ -29,6 +32,11 @@ socket		= /var/run/mysqld/mysqld.sock
 nice		= 0
 
 [mysqld]
+# character-set
+collation-server=utf8_unicode_ci
+init-connect='SET NAMES utf8'
+character-set-server=utf8
+
 #
 # * Basic Settings
 #
@@ -115,6 +123,9 @@ quote-names
 max_allowed_packet	= 16M
 
 [mysql]
+# character-set
+default-character-set=utf8
+
 #no-auto-rehash	# faster start of mysql but no tab completition
 
 [isamchk]
