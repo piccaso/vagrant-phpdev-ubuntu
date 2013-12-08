@@ -8,16 +8,47 @@
 #
 
 #
-# initialize
+# ufw (firewall) config
+#
+execute 'ufw-enable' do
+  command "ufw default deny; printf y | ufw enable"
+end
+
+node['ufw']['allows'].each do |port|
+  execute 'ufw-allow-' + port do
+    command 'ufw allow ' + port
+  end
+end
+
+execute 'ufw-reload' do
+  command "ufw reload"
+end
+
+#
+# ssh config
+#
+service 'ssh' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+template '/etc/ssh/sshd_config' do
+  notifies :reload, 'service[ssh]'
+end
+
+#
+# set .bashrc and hosts by templates, set hostname
 #
 template '/home/vagrant/.bashrc' do
   user 'vagrant'
   group 'vagrant'
 end
 
-template '/home/vagrant/.chef/knife.rb' do
-  user 'vagrant'
-  group 'vagrant'
+template '/etc/hosts' do
+end
+
+execute 'hostname' do
+  command "hostname #{node['server']}"
 end
 
 #
@@ -34,9 +65,6 @@ package 'git' do
   action :install
 end
 
-#
-# git settings
-#
 execute 'git-config-user-email' do
   command "sudo -u vagrant -H git config --global user.email \"#{node['git']['user']['email']}\""
 end
@@ -71,13 +99,23 @@ execute 'a2enmod' do
   command 'a2enmod rewrite' # apache will be restarted by template
 end
 
+template '/etc/php5/apache2/php.ini' do
+  notifies :restart, 'service[apache2]'
+end
+
+template '/etc/php5/cli/php.ini' do
+end
+
+template '/etc/apache2/apache2.conf' do
+  notifies :restart, 'service[apache2]'
+end
+
 #
 # install mysql
 #
 package 'mysql-server' do
   action :install
-  notifies :run, 'execute[mysqladmin]'
-  notifies :run, 'execute[mysql]'
+  notifies :run, 'execute[mysqladmin]', :immediately
 end
 
 service 'mysql' do
@@ -94,6 +132,82 @@ package 'php5-mysqlnd' do
   action :install
 end
 
+template '/etc/mysql/my.cnf' do
+  notifies :restart, 'service[mysql]'
+end
+
+#
+# install mongodb
+#
+package 'mongodb' do
+  action :install
+end
+
+service 'mongodb' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+execute 'pecl-mongo' do
+  command 'pecl install mongo'
+  not_if {File.exists?('/usr/lib/php5/20121212/mongo.so')}
+end
+
+#
+# install td-agent
+#
+execute 'td-agent' do
+  command 'curl -L http://toolbelt.treasure-data.com/sh/install-ubuntu-precise.sh | sh'
+  not_if {File.exists?('/etc/init.d/td-agent')}
+end
+
+#
+# install packages by npm
+#
+apt_repository 'nodejs' do
+  uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
+  distribution node['lsb']['codename']
+  components ['main']
+  keyserver 'keyserver.ubuntu.com'
+  key 'C7917B12'
+end
+
+package 'nodejs' do
+  action :install
+end
+
+%w{grunt-cli bower}.each do |p|
+  execute p do
+    command 'npm install -g ' + p
+  end
+end
+
+#
+# install packages by gem
+#
+%w{compass}.each do |p|
+  gem_package p do
+    action :install
+  end
+end
+
+#
+# for development
+#
+
+#
+# set knife.rb by template
+#
+execute 'mkdir-chef' do
+  command 'mkdir /home/vagrant/.chef'
+  not_if {File.exists?('/home/vagrant/.chef')}
+end
+
+template '/home/vagrant/.chef/knife.rb' do
+  user 'vagrant'
+  group 'vagrant'
+end
+
 #
 # install phpmyadmin
 #
@@ -106,7 +220,6 @@ link '/var/www/phpmyadmin' do
 end
 
 execute 'mysql' do
-  action :nothing
   command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
 end
 
@@ -128,23 +241,6 @@ end
 
 link '/var/www/xhprof' do
   to '/usr/share/php/xhprof_html'
-end
-
-#
-# install mongodb
-#
-package 'mongodb' do
-  action :install
-end
-
-service 'mongodb' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
-end
-
-execute 'pecl-mongo' do
-  command 'pecl install mongo'
-  not_if {File.exists?('/usr/lib/php5/20121212/mongo.so')}
 end
 
 #
@@ -197,59 +293,12 @@ execute 'php-zmq' do
 end
 
 #
-# install packages by npm
-#
-apt_repository 'nodejs' do
-  uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
-  distribution node['lsb']['codename']
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key 'C7917B12'
-end
-
-package 'nodejs' do
-  action :install
-end
-
-%w{grunt-cli bower}.each do |p|
-  execute p do
-    command 'npm install -g ' + p
-  end
-end
-
-#
 # install packages by gem
 #
-%w{compass heroku af}.each do |p|
+%w{heroku af}.each do |p|
   gem_package p do
     action :install
   end
-end
-
-#
-# install td-agent
-#
-execute 'td-agent' do
-  command 'curl -L http://toolbelt.treasure-data.com/sh/install-ubuntu-precise.sh | sh'
-  not_if {File.exists?('/etc/init.d/td-agent')}
-end
-
-#
-# templates
-#
-template '/etc/php5/apache2/php.ini' do
-  notifies :restart, 'service[apache2]'
-end
-
-template '/etc/php5/cli/php.ini' do
-end
-
-template '/etc/apache2/apache2.conf' do
-  notifies :restart, 'service[apache2]'
-end
-
-template '/etc/mysql/my.cnf' do
-  notifies :restart, 'service[mysql]'
 end
 
 #

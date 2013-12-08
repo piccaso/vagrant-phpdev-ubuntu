@@ -1,4 +1,13 @@
 {
+  "ufw": {
+    "allows": [
+     "http", "https", "22" 
+    ]
+  },
+  "ssh": {
+    "port": "22"
+  },
+  "server": "phpdev",
   "mysql": {
     "root": {
       "password": "root"
