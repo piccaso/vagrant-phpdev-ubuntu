@@ -163,7 +163,7 @@ Include ports.conf
 
 <Directory /var/www/>
 	Options Indexes FollowSymLinks
-	AllowOverride All
+	AllowOverride <%= node['apache2']['var/www']['allow_override'] %>
 	Require all granted
 </Directory>
 

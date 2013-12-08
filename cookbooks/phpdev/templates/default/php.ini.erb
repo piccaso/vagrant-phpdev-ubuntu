@@ -403,7 +403,7 @@ max_input_time = 60
 
 ; Maximum amount of memory a script may consume (128MB)
 ; http://php.net/memory-limit
-memory_limit = 512M
+memory_limit = <%= node['php']['memory_limit'] %>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Error handling and logging ;
@@ -476,7 +476,7 @@ error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
 ; Development Value: On
 ; Production Value: Off
 ; http://php.net/display-errors
-display_errors = On
+display_errors = <%= node['php']['display_errors'] %>
 
 ; The display of errors which occur during PHP's startup sequence are handled
 ; separately from display_errors. PHP's default behavior is to suppress those
@@ -864,11 +864,12 @@ default_socket_timeout = 60
 ; If you only provide the name of the extension, PHP will look for it in its
 ; default extension directory.
 ;
-zend_extension=/usr/lib/php5/20121212/xdebug.so
-extension=xhprof.so
-extension=mongo.so
-extension=zmq.so
-extension=gearman.so
+<% node['php']['zend_extensions'].each do |extension| %>
+zend_extension = <%= extension %>
+<% end %>
+<% node['php']['extensions'].each do |extension| %>
+extension = <%= extension %>
+<% end %>
 
 ;;;;;;;;;;;;;;;;;;;
 ; Module Settings ;
