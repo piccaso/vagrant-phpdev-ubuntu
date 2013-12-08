@@ -198,9 +198,9 @@ end
 #
 # set knife.rb by template
 #
-execute 'mkdir-chef' do
-  command 'mkdir /home/vagrant/.chef'
-  not_if {File.exists?('/home/vagrant/.chef')}
+directory '/home/vagrant/.chef' do
+  user 'vagrant'
+  group 'vagrant'
 end
 
 template '/home/vagrant/.chef/knife.rb' do
