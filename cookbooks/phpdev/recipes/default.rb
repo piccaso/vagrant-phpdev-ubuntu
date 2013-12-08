@@ -285,7 +285,7 @@ execute 'php-zmq' do
     phpize
     ./configure
     make
-    paco -D make install
+    make install
     cd ../
     rm -r php-zmq
   CMD
