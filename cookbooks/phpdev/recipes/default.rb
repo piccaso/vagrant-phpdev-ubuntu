@@ -54,7 +54,7 @@ end
 #
 # apt-get update
 #
-execute 'apt-get' do
+execute 'apt-get-update' do
   command 'apt-get update'
 end
 
