@@ -211,7 +211,7 @@ end
 # run custom recipe
 #
 begin
-  include_recipe 'phpdev::custom'
+  include_recipe 'default::custom'
 rescue Exception => error
   # avoid Chef::Exceptions::RecipeNotFound
 end
