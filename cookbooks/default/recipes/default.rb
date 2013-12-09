@@ -150,7 +150,7 @@ end
 
 execute 'pecl-mongo' do
   command 'pecl install mongo'
-  not_if {File.exists?('/usr/lib/php5/20121212/mongo.so')}
+  creates '/usr/lib/php5/20121212/mongo.so'
 end
 
 #
@@ -158,7 +158,7 @@ end
 #
 execute 'td-agent' do
   command 'curl -L http://toolbelt.treasure-data.com/sh/install-ubuntu-precise.sh | sh'
-  not_if {File.exists?('/etc/init.d/td-agent')}
+  creates '/etc/init.d/td-agent'
 end
 
 #

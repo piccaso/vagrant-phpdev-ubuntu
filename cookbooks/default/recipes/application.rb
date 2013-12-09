@@ -40,7 +40,7 @@ end
 #
 execute 'pecl-xdebug' do
   command 'pecl install xdebug'
-  not_if {File.exists?('/usr/lib/php5/20121212/xdebug.so')}
+  creates '/usr/lib/php5/20121212/xdebug.so'
 end
 
 #
@@ -48,7 +48,7 @@ end
 #
 execute 'pecl-xhprof' do
   command 'pecl install xhprof-0.9.4'
-  not_if {File.exists?('/usr/lib/php5/20121212/xhprof.so')}
+  creates '/usr/lib/php5/20121212/xhprof.so'
 end
 
 link '/var/www/xhprof' do
@@ -78,7 +78,7 @@ end
 
 execute 'pecl-gearman' do
   command 'pecl install gearman-1.0.3'
-  not_if {File.exists?('/usr/lib/php5/20121212/gearman.so')}
+  creates '/usr/lib/php5/20121212/gearman.so'
 end
 
 #
@@ -101,7 +101,7 @@ execute 'php-zmq' do
     cd ../
     rm -r php-zmq
   CMD
-  not_if {File.exists?('/usr/lib/php5/20121212/zmq.so')}
+  creates '/usr/lib/php5/20121212/zmq.so'
 end
 
 #
@@ -196,7 +196,7 @@ end
 
 execute 'rm composer.lock' do
   command 'rm /home/vagrant/phpredisadmin/composer.lock'
-  not_if {File.exists?('/home/vagrant/phpredisadmin/vendor')}
+  creates '/home/vagrant/phpredisadmin/vendor'
 end
 
 composer_project '/home/vagrant/phpredisadmin' do
