@@ -93,9 +93,9 @@ Vagrant.configure("2") do |config|
   #   chef.data_bags_path = "../my-recipes/data_bags"
   #   chef.add_role "web"
     chef.add_recipe "apt"
-    chef.add_recipe "phpdev"
+    chef.add_recipe "default"
     chef.add_recipe "composer"
-    chef.add_recipe "phpdev::tools"
+    chef.add_recipe "default::application"
   #
   #   # You may also specify custom JSON attributes:
     chef.json = JSON.parse(File.read("cookbooks/chef.json"))

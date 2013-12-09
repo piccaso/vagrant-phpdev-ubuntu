@@ -1,11 +1,117 @@
 #
-# Cookbook Name:: phpdev
-# Recipe:: tools
+# Cookbook Name:: default
+# Recipe:: application
 #
 # Copyright 2013, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
 #
+
+#
+# set knife.rb by template
+#
+directory '/home/vagrant/.chef' do
+  user 'vagrant'
+  group 'vagrant'
+end
+
+template '/home/vagrant/.chef/knife.rb' do
+  user 'vagrant'
+  group 'vagrant'
+end
+
+#
+# install phpmyadmin
+#
+package 'phpmyadmin' do
+  action :install
+end
+
+link '/var/www/phpmyadmin' do
+  to '/usr/share/phpmyadmin'
+end
+
+execute 'mysql' do
+  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
+end
+
+#
+# install xdebug
+#
+execute 'pecl-xdebug' do
+  command 'pecl install xdebug'
+  not_if {File.exists?('/usr/lib/php5/20121212/xdebug.so')}
+end
+
+#
+# install xhprof
+#
+execute 'pecl-xhprof' do
+  command 'pecl install xhprof-0.9.4'
+  not_if {File.exists?('/usr/lib/php5/20121212/xhprof.so')}
+end
+
+link '/var/www/xhprof' do
+  to '/usr/share/php/xhprof_html'
+end
+
+#
+# install redis
+#
+package 'redis-server' do
+  action :install
+end
+
+service 'redis-server' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+#
+# install gearman
+#
+%w{gearman libgearman-dev}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+execute 'pecl-gearman' do
+  command 'pecl install gearman-1.0.3'
+  not_if {File.exists?('/usr/lib/php5/20121212/gearman.so')}
+end
+
+#
+# install php-zmq
+#
+%w{libzmq-dev re2c pkg-config}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+execute 'php-zmq' do
+  command <<-CMD
+    git clone git://github.com/mkoppanen/php-zmq.git
+    cd php-zmq/
+    phpize
+    ./configure
+    make
+    make install
+    cd ../
+    rm -r php-zmq
+  CMD
+  not_if {File.exists?('/usr/lib/php5/20121212/zmq.so')}
+end
+
+#
+# install packages by gem
+#
+%w{heroku af}.each do |p|
+  gem_package p do
+    action :install
+  end
+end
 
 #
 # install phpdev-tools
@@ -99,4 +205,13 @@ end
 
 link '/var/www/phpredisadmin' do
   to '/home/vagrant/phpredisadmin'
+end
+
+#
+# run custom recipe
+#
+begin
+  include_recipe 'phpdev::custom'
+rescue Exception => error
+  # avoid Chef::Exceptions::RecipeNotFound
 end
