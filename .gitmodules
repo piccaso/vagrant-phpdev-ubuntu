@@ -3,4 +3,4 @@
 	url = https://github.com/opscode-cookbooks/apt.git
 [submodule "cookbooks/composer"]
 	path = cookbooks/composer
-	url = https://github.com/zircote/chef-composer.git
+	url = https://github.com/mp-php/chef-resources-composer.git

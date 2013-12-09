@@ -194,11 +194,6 @@ git '/home/vagrant/phpredisadmin' do
   reference 'master'
 end
 
-execute 'rm composer.lock' do
-  command 'rm /home/vagrant/phpredisadmin/composer.lock'
-  creates '/home/vagrant/phpredisadmin/vendor'
-end
-
 composer_project '/home/vagrant/phpredisadmin' do
   action :install
 end
