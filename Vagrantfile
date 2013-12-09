@@ -98,7 +98,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "default::application"
   #
   #   # You may also specify custom JSON attributes:
-    chef.json = JSON.parse(File.read("cookbooks/chef.json"))
+    chef.json = JSON.parse(File.read("cookbooks/chef.json")) if File.exists?("cookbooks/chef.json")
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,

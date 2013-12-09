@@ -1,3 +1,5 @@
 .vagrant/
 share/
 cookbooks/default/recipes/custom.rb
+cookbooks/chef.json
+
