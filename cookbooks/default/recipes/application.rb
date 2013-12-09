@@ -125,6 +125,8 @@ git '/home/vagrant/phpdev-tools' do
 end
 
 composer_project '/home/vagrant/phpdev-tools' do
+  user 'vagrant'
+  group 'vagrant'
   action :install
 end
 
@@ -195,6 +197,8 @@ git '/home/vagrant/phpredisadmin' do
 end
 
 composer_project '/home/vagrant/phpredisadmin' do
+  user 'vagrant'
+  group 'vagrant'
   action :install
 end
 
