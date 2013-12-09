@@ -14,9 +14,9 @@ execute 'ufw-enable' do
   command "ufw default deny; printf y | ufw enable"
 end
 
-node['ufw']['allows'].each do |port|
-  execute 'ufw-allow-' + port do
-    command 'ufw allow ' + port
+node['ufw']['allows'].each do |allow|
+  execute 'ufw-allow-' + allow do
+    command 'ufw allow ' + allow
   end
 end
 
@@ -34,6 +34,17 @@ end
 
 template '/etc/ssh/sshd_config' do
   notifies :reload, 'service[ssh]'
+end
+
+#
+# locale and timezone
+#
+execute 'locale' do
+  command "locale-gen #{node['locale']}; update-locale LANGUAGE=#{node['locale']} LC_ALL=#{node['locale']} LANG=#{node['locale']}  2> /dev/null"
+end
+
+execute 'timezone' do
+  command "echo '#{node['timezone']}' > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata"
 end
 
 #
@@ -66,11 +77,15 @@ package 'git' do
 end
 
 execute 'git-config-user-email' do
-  command "sudo -u vagrant -H git config --global user.email \"#{node['git']['user']['email']}\""
+  user 'vagrant'
+  group 'vagrant'
+  command "git config --global user.email \"#{node['git']['user']['email']}\""
 end
 
 execute 'git-config-user-name' do
-  command "sudo -u vagrant -H git config --global user.name \"#{node['git']['user']['name']}\""
+  user 'vagrant'
+  group 'vagrant'
+  command "git config --global user.name \"#{node['git']['user']['name']}\""
 end
 
 #
@@ -179,6 +194,7 @@ end
 %w{grunt-cli bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
+    only_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
   end
 end
 
