@@ -13,7 +13,7 @@
 # ufw (firewall) config
 #
 execute 'ufw-enable' do
-  command "ufw default deny; printf y | ufw enable"
+  command 'ufw default deny; printf y | ufw enable'
 end
 
 node['ufw']['allows'].each do |allow|
@@ -81,13 +81,13 @@ end
 execute 'git-config-user-email' do
   user 'vagrant'
   group 'vagrant'
-  command "git config --global user.email \"#{node['git']['user']['email']}\""
+  command "git config --global user.email '#{node['git']['user']['email']}'"
 end
 
 execute 'git-config-user-name' do
   user 'vagrant'
   group 'vagrant'
-  command "git config --global user.name \"#{node['git']['user']['name']}\""
+  command "git config --global user.name '#{node['git']['user']['name']}'"
 end
 
 #
