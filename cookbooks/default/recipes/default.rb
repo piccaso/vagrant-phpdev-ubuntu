@@ -196,7 +196,7 @@ end
 %w{grunt-cli bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
-    only_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
+    not_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
   end
 end
 
