@@ -121,6 +121,13 @@ template '/etc/apache2/apache2.conf' do
 end
 
 #
+# install composer
+#
+composer '/usr/local/bin' do
+  action :install
+end
+
+#
 # install mysql
 #
 package 'mysql-server' do
