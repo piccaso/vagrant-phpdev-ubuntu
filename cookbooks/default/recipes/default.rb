@@ -65,13 +65,6 @@ execute 'hostname' do
 end
 
 #
-# apt-get update
-#
-execute 'apt-get-update' do
-  command 'apt-get update'
-end
-
-#
 # install git
 #
 package 'git' do
