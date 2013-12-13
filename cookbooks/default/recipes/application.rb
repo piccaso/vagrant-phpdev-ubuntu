@@ -56,18 +56,6 @@ link '/var/www/xhprof' do
 end
 
 #
-# install redis
-#
-package 'redis-server' do
-  action :install
-end
-
-service 'redis-server' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
-end
-
-#
 # install gearman
 #
 %w{gearman libgearman-dev}.each do |p|
