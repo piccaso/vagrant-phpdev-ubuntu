@@ -94,7 +94,7 @@ apt_repository 'php5' do
   key 'E5267A6C'
 end
 
-%w{php5 php5-dev php5-curl php5-mcrypt}.each do |p|
+%w{php5 php5-dev php5-curl php5-mcrypt php5-gd}.each do |p|
   package p do
     action :install
   end
