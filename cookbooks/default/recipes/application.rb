@@ -32,7 +32,8 @@ link '/var/www/phpmyadmin' do
 end
 
 execute 'mysql' do
-  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
+  action :nothing
+  command "mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
 end
 
 #
