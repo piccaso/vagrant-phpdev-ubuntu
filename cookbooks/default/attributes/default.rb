@@ -10,7 +10,7 @@ default['ssh']['port'] = '22'
 default['git']['user']['email'] = 'vagrant@phpdev'
 default['git']['user']['name'] = 'vagrant'
 # php settings
-default['php']['memory_limit'] = '512M'
+default['php']['memory_limit'] = '128M'
 default['php']['display_errors'] = 'On'
 default['php']['zend_extensions'] = ['/usr/lib/php5/20121212/xdebug.so']
 default['php']['extensions'] = ['mongo.so', 'xhprof.so', 'gearman.so', 'zmq.so']
