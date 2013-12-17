@@ -183,6 +183,12 @@ execute 'td-agent' do
   notifies :run, 'execute[fluent-plugin-mysqlslowquery]'
 end
 
+group 'adm' do
+  action :modify
+  members ['td-agent']
+  append true
+end
+
 execute 'fluent-plugin-mysqlslowquery' do
   action :nothing
   command '/usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-mysqlslowquery'
