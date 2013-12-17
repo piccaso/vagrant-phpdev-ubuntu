@@ -175,6 +175,17 @@ link '/var/www/rockmongo' do
 end
 
 #
+# avoid the following error
+#
+# ERROR: Insufficient free space for journal files
+# Please make at least 3379MB available in /var/lib/mongodb/journal or use --smallfiles
+#
+cookbook_file '/etc/mongodb.conf' do
+  notifies :restart, 'service[mongodb]'
+  notifies :restart, 'service[td-agent]'
+end
+
+#
 # install phpRedisAdmin
 #
 git '/home/vagrant/phpredisadmin' do
