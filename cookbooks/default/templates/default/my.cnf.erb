@@ -36,6 +36,9 @@ nice		= 0
 collation-server=utf8_unicode_ci
 init-connect='SET NAMES utf8'
 character-set-server=utf8
+slow_query_log=ON
+slow_query_log_file=/var/log/mysql/mysql-slow.log
+long_query_time = 0.5
 
 #
 # * Basic Settings

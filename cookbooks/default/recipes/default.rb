@@ -52,7 +52,7 @@ end
 #
 # set .bashrc and hosts by templates, set hostname
 #
-template '/home/vagrant/.bashrc' do
+cookbook_file "/home/vagrant/.bashrc" do
   user 'vagrant'
   group 'vagrant'
 end
@@ -180,6 +180,21 @@ end
 execute 'td-agent' do
   command 'curl -L http://toolbelt.treasure-data.com/sh/install-ubuntu-precise.sh | sh'
   creates '/etc/init.d/td-agent'
+  notifies :run, 'execute[fluent-plugin-mysqlslowquery]'
+end
+
+execute 'fluent-plugin-mysqlslowquery' do
+  action :nothing
+  command '/usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-mysqlslowquery'
+end
+
+service 'td-agent' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+cookbook_file '/etc/td-agent/td-agent.conf' do
+  notifies :restart, 'service[td-agent]'
 end
 
 #
