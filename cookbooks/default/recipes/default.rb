@@ -120,6 +120,10 @@ template '/etc/apache2/apache2.conf' do
   notifies :restart, 'service[apache2]'
 end
 
+cookbook_file '/etc/apache2/sites-available/000-default.conf' do
+  notifies :restart, 'service[apache2]'
+end
+
 #
 # install composer
 #
