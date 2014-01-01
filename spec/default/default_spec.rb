@@ -40,6 +40,15 @@ describe command('hostname') do
 end
 
 #
+# install packages
+#
+%w{zip}.each do |p|
+  describe package(p) do
+    it { should be_installed }
+  end
+end
+
+#
 # install git
 #
 describe package('git') do

@@ -65,6 +65,15 @@ execute 'hostname' do
 end
 
 #
+# install packages
+#
+%w{zip}.each do |p|
+  package p do
+    action :install
+  end
+end
+
+#
 # install git
 #
 package 'git' do
