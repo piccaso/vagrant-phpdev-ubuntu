@@ -269,7 +269,7 @@ service 'redis-server' do
 end
 
 #
-# postfix
+# install postfix
 #
 package 'mailutils' do
   action :install
