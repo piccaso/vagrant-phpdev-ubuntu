@@ -16,6 +16,7 @@ directory '/home/vagrant/.chef' do
 end
 
 template '/home/vagrant/.chef/knife.rb' do
+  source 'default/knife.rb.erb'
   user 'vagrant'
   group 'vagrant'
 end
@@ -180,7 +181,8 @@ end
 # ERROR: Insufficient free space for journal files
 # Please make at least 3379MB available in /var/lib/mongodb/journal or use --smallfiles
 #
-cookbook_file '/etc/mongodb.conf' do
+template '/etc/mongodb.conf' do
+  source 'default/mongodb.conf.erb'
   notifies :restart, 'service[mongodb]'
   notifies :restart, 'service[td-agent]'
 end

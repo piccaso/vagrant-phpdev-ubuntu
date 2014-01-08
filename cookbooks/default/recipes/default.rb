@@ -35,6 +35,7 @@ service 'ssh' do
 end
 
 template '/etc/ssh/sshd_config' do
+  source 'ssh/sshd_config.erb'
   notifies :reload, 'service[ssh]'
 end
 
@@ -52,12 +53,14 @@ end
 #
 # set .bashrc and hosts by templates, set hostname
 #
-cookbook_file "/home/vagrant/.bashrc" do
+template "/home/vagrant/.bashrc" do
+  source 'default/.bashrc.erb'
   user 'vagrant'
   group 'vagrant'
 end
 
 template '/etc/hosts' do
+  source 'default/hosts.erb'
 end
 
 execute 'hostname' do
@@ -119,17 +122,21 @@ execute 'a2enmod' do
 end
 
 template '/etc/php5/apache2/php.ini' do
+  source 'php/php.ini.erb'
   notifies :restart, 'service[apache2]'
 end
 
 template '/etc/php5/cli/php.ini' do
+  source 'php/php.ini.erb'
 end
 
 template '/etc/apache2/apache2.conf' do
+  source 'apache/apache2.conf.erb'
   notifies :restart, 'service[apache2]'
 end
 
-cookbook_file '/etc/apache2/sites-available/000-default.conf' do
+template '/etc/apache2/sites-available/000-default.conf' do
+  source 'apache/000-default.conf.erb'
   notifies :restart, 'service[apache2]'
 end
 
@@ -167,6 +174,7 @@ package 'php5-mysqlnd' do
 end
 
 template '/etc/mysql/my.cnf' do
+  source 'mysql/my.cnf.erb'
   notifies :restart, 'service[mysql]'
 end
 
@@ -212,7 +220,8 @@ service 'td-agent' do
   action [:enable, :start]
 end
 
-cookbook_file '/etc/td-agent/td-agent.conf' do
+template '/etc/td-agent/td-agent.conf' do
+  source 'default/td-agent.conf.erb'
   notifies :restart, 'service[td-agent]'
 end
 
