@@ -21,3 +21,4 @@ default['apache2']['var/www']['allow_override'] = 'All'
 default['mysql']['root']['password'] = 'root'
 # other settings
 default['server'] = 'phpdev'
+default['host'] = 'phpdev'

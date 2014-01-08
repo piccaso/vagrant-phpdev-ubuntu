@@ -258,3 +258,30 @@ service 'redis-server' do
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
 end
+
+#
+# postfix
+#
+package 'mailutils' do
+  action :install
+end
+
+service 'postfix' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+template '/etc/mailname' do
+  source 'postfix/mailname.erb'
+  notifies :restart, 'service[postfix]'
+end
+
+template '/etc/postfix/header_checks' do
+  source 'postfix/header_checks.erb'
+  notifies :restart, 'service[postfix]'
+end
+
+template '/etc/postfix/main.cf' do
+  source 'postfix/main.cf.erb'
+  notifies :restart, 'service[postfix]'
+end
