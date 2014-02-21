@@ -2,16 +2,13 @@
 
 ## Features
 
+* Ubuntu 13.10 http://releases.ubuntu.com/13.10/
 * PHP 5.5 http://php.net/
 * Apache 2.4 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
-* phpMyAdmin http://www.phpmyadmin.net/ http://192.168.33.10/phpmyadmin/ (root/root)
 * Xdebug http://xdebug.org/
-* xhprof https://github.com/facebook/xhprof http://192.168.33.10/xhprof/
 * MongoDB http://www.mongodb.org/
-* RockMongo http://rockmongo.com/ http://192.168.33.10/rockmongo/ (admin/admin)
 * Redis http://redis.io/
-* phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://192.168.33.10/phpredisadmin/
 * gearman http://gearman.org/
 * ZeroMQ http://zeromq.org/
 * node.js http://nodejs.org/
@@ -23,6 +20,13 @@
 * Fluentd(td-agent) http://fluentd.org/
 * phpdev-tools https://github.com/mp-php/phpdev-tools
 
+### Web interfaces
+
+* SQL Buddy https://github.com/calvinlough/sqlbuddy http://192.168.33.10/sqlbuddy/ (root/root)
+* xhprof https://github.com/facebook/xhprof http://192.168.33.10/xhprof/
+* RockMongo http://rockmongo.com/ http://192.168.33.10/rockmongo/ (admin/admin)
+* phpRedisAdmin https://github.com/ErikDubbelboer/phpRedisAdmin http://192.168.33.10/phpredisadmin/
+
 ## Usage
 
 ### Run
@@ -30,6 +34,12 @@
 	$ git clone --recursive https://github.com/mp-php/vagrant-phpdev-ubuntu.git
 	$ cd vagrant-phpdev-ubuntu/
 	$ vagrant up # this could take a while...
+
+#### Troubleshooting
+
+If you can not run this recipe, retry after install plugin "vagrant-vbguest"
+
+	$ vagrant plugin install vagrant-vbguest
 
 ### Make Project
 
