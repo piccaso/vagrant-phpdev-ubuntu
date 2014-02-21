@@ -30,6 +30,8 @@ end
 # ssh config
 #
 service 'ssh' do
+  # @see https://github.com/opscode-cookbooks/openssh/pull/30/files
+  provider Chef::Provider::Service::Upstart
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
 end
@@ -156,6 +158,8 @@ package 'mysql-server' do
 end
 
 service 'mysql' do
+  # @see service[ssh]
+  provider Chef::Provider::Service::Upstart
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
 end
@@ -182,6 +186,8 @@ package 'mongodb' do
 end
 
 service 'mongodb' do
+  # @see service[ssh]
+  provider Chef::Provider::Service::Upstart
   supports :status => true, :restart => true, :reload => true
   action [:enable, :start]
 end
