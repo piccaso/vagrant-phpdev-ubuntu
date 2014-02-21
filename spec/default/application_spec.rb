@@ -7,14 +7,14 @@ require 'spec_helper'
 # do nothing.
 
 #
-# install phpmyadmin
+# install sqlbuddy
 #
-describe package('phpmyadmin') do
-  it { should be_installed }
+describe file('/home/vagrant/sqlbuddy/.git') do
+  it { should be_directory }
 end
 
-describe file('/var/www/phpmyadmin') do
-  it { should be_linked_to '/usr/share/phpmyadmin' }
+describe file('/var/www/sqlbuddy') do
+  it { should be_linked_to '/home/vagrant/sqlbuddy/src' }
 end
 
 #

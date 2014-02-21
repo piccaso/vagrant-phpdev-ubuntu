@@ -22,19 +22,22 @@ template '/home/vagrant/.chef/knife.rb' do
 end
 
 #
-# install phpmyadmin
+# install sqlbuddy
 #
-package 'phpmyadmin' do
-  action :install
+git '/home/vagrant/sqlbuddy' do
+  action :checkout
+  user 'vagrant'
+  group 'vagrant'
+  repository 'https://github.com/calvinlough/sqlbuddy.git'
+  reference 'master'
 end
 
-link '/var/www/phpmyadmin' do
-  to '/usr/share/phpmyadmin'
+link '/var/www/sqlbuddy' do
+  to '/home/vagrant/sqlbuddy/src'
 end
 
 execute 'mysql' do
-  action :nothing
-  command "mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
+  command "mysql -u root -p#{node['mysql']['root']['password']} -e \"GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '#{node['mysql']['root']['password']}' WITH GRANT OPTION\""
 end
 
 #

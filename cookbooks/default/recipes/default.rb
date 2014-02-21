@@ -150,13 +150,9 @@ end
 #
 # install mysql
 #
-# TODO: :immediately should not be used for avoid the following error in phpmyadmin
-# #1146 - Table 'phpmyadmin.pma_recent' doesn't exist
-#
 package 'mysql-server' do
   action :install
-  notifies :run, 'execute[mysql]'
-  notifies :run, 'execute[mysqladmin]'
+  notifies :run, 'execute[mysqladmin]', :immediately
 end
 
 service 'mysql' do
