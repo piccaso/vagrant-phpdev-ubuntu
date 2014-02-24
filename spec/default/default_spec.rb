@@ -149,7 +149,7 @@ describe package('nodejs') do
   it { should be_installed }
 end
 
-%w{grunt-cli bower}.each do |p|
+%w{gulp grunt-cli bower}.each do |p|
   describe command("npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'") do
     it { should return_exit_status 0 }
   end

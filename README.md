@@ -12,6 +12,7 @@
 * gearman http://gearman.org/
 * ZeroMQ http://zeromq.org/
 * node.js http://nodejs.org/
+* gulp.js http://gulpjs.com/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
 * Compass http://compass-style.org/
