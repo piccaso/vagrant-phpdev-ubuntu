@@ -34,7 +34,7 @@
 
 	$ git clone --recursive https://github.com/mp-php/vagrant-phpdev-ubuntu.git
 	$ cd vagrant-phpdev-ubuntu/
-	$ vagrant up # this could take a while...
+	$ vagrant up --provision # this could take a while...
 
 #### Troubleshooting
 
