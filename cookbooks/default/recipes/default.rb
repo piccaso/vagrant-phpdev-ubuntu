@@ -242,7 +242,7 @@ package 'nodejs' do
   action :install
 end
 
-%w{gulp grunt-cli bower}.each do |p|
+%w{gulp karma bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
     not_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
