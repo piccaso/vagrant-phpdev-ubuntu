@@ -12,6 +12,7 @@
 * gearman http://gearman.org/
 * ZeroMQ http://zeromq.org/
 * node.js http://nodejs.org/
+* Yeoman http://yeoman.io/
 * gulp.js http://gulpjs.com/
 * Grunt http://gruntjs.com/
 * Bower http://bower.io/
