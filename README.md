@@ -2,7 +2,7 @@
 
 ## Features
 
-* Ubuntu 13.10 http://releases.ubuntu.com/13.10/
+* Ubuntu 14.04 http://releases.ubuntu.com/14.04/
 * PHP 5.5 http://php.net/
 * Apache 2.4 http://www.apache.org/
 * MySQL 5.5 http://www.mysql.com/
