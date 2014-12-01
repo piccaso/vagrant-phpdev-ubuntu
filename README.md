@@ -33,7 +33,7 @@
 
 ### Run
 
-	$ git clone --recursive https://github.com/mp-php/vagrant-phpdev-ubuntu.git
+	$ git clone --single-branch --recursive https://github.com/piccaso/vagrant-phpdev-ubuntu.git
 	$ cd vagrant-phpdev-ubuntu/
 	$ vagrant up --provision # this could take a while...
 
