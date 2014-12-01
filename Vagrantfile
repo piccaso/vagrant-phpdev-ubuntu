@@ -10,8 +10,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu1404"
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  # config.vm.box = "ubuntu1404"
+  # config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box = "vagrantPhpdevUbuntu"
+  config.vm.box_url = "https://github.com/piccaso/vagrant-phpdev-ubuntu/releases/download/v0.1.0/vagrant-phpdev-ubuntu-v0.1.0.box"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -41,6 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "share", "/share", :create => true, :mount_options => ["dmode=777", "fmode=777"]
+  config.vm.synced_folder "www", "/var/www", :create => true, :mount_options => ["dmode=755", "fmode=644"], :owner => "www-data"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
